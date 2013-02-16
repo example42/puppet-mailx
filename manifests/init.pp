@@ -99,7 +99,7 @@ class mailx (
   $noops               = params_lookup( 'noops' ),
   $package             = params_lookup( 'package' ),
   $config_dir          = params_lookup( 'config_dir' ),
-  $config_file         = params_lookup( 'config_file' ),
+  $config_file         = params_lookup( 'config_file' )
   ) inherits mailx::params {
 
   $config_file_mode=$mailx::params::config_file_mode
