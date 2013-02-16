@@ -17,15 +17,16 @@ class mailx::params {
   ### Application related parameters
 
   $package = $::operatingsystem ? {
+    /(?i:Ubuntu|Debian|Mint)/ => 'bsd-mailx',
     default => 'mailx',
   }
 
   $config_dir = $::operatingsystem ? {
-    default => '/etc/mailx',
+    default => '',
   }
 
   $config_file = $::operatingsystem ? {
-    default => '/etc/mailx/mailx.conf',
+    default => '/etc/mail.rc',
   }
 
   $config_file_mode = $::operatingsystem ? {
