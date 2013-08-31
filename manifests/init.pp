@@ -60,7 +60,7 @@
 # [*noops*]
 #   Set noop metaparameter to true for all the resources managed by the module.
 #   Basically you can run a dryrun for this specific module if you set
-#   this to true. Default: false
+#   this to true. Default: undef
 #
 # Default class params - As defined in mailx::params.
 # Note that these variables are mostly defined and used in the module itself,
@@ -109,7 +109,6 @@ class mailx (
   $bool_source_dir_purge=any2bool($source_dir_purge)
   $bool_absent=any2bool($absent)
   $bool_audit_only=any2bool($audit_only)
-  $bool_noops=any2bool($noops)
 
   ### Definition of some variables used in the module
   $manage_package = $mailx::bool_absent ? {
@@ -145,7 +144,7 @@ class mailx (
   ### Managed resources
   package { $mailx::package:
     ensure  => $mailx::manage_package,
-    noop    => $mailx::bool_noops,
+    noop    => $mailx::noops,
   }
 
   file { 'mailx.conf':
@@ -159,7 +158,7 @@ class mailx (
     content => $mailx::manage_file_content,
     replace => $mailx::manage_file_replace,
     audit   => $mailx::manage_audit,
-    noop    => $mailx::bool_noops,
+    noop    => $mailx::noops,
   }
 
   # The whole mailx configuration directory can be recursively overriden
@@ -175,7 +174,7 @@ class mailx (
       force   => $mailx::bool_source_dir_purge,
       replace => $mailx::manage_file_replace,
       audit   => $mailx::manage_audit,
-      noop    => $mailx::bool_noops,
+      noop    => $mailx::noops,
     }
   }
 
